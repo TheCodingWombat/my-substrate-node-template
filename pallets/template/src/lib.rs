@@ -1,3 +1,10 @@
+#![warn(
+    clippy::disallowed_methods,
+    clippy::indexing_slicing,
+    clippy::todo,
+    clippy::unwrap_used,
+    clippy::panic,
+)]
 #![cfg_attr(not(feature = "std"), no_std)]
 
 /// Edit this file to define custom logic or remove it if it is not needed.
@@ -17,6 +24,7 @@ mod benchmarking;
 #[frame_support::pallet]
 pub mod pallet {
 	use frame_support::pallet_prelude::*;
+	
 	use frame_system::pallet_prelude::*;
 
 	#[pallet::pallet]
@@ -81,8 +89,9 @@ pub mod pallet {
 		}
 
 		/// An example dispatchable that may throw a custom error.
+		#[pallet::call_index(3)]
 		#[pallet::weight(10_000 + T::DbWeight::get().reads_writes(1,1).ref_time())]
-		pub fn cause_error(origin: OriginFor<T>) -> DispatchResult {
+        pub fn cause_error(origin: OriginFor<T>) -> DispatchResult {
 			let _who = ensure_signed(origin)?;
 
 			// Read a value from storage.
@@ -97,6 +106,18 @@ pub mod pallet {
 					Ok(())
 				},
 			}
+		}
+
+		#[pallet::weight(1)]
+		pub fn extrinsic3(_origin: OriginFor<T>) -> DispatchResult{
+			Ok(())
+		}
+
+		#[pallet::weight(2)]
+		pub fn extrinsic4(_origin: OriginFor<T>) -> DispatchResult {
+			
+			
+			Ok(())
 		}
 	}
 }
