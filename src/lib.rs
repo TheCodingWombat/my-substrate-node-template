@@ -1,10 +1,3 @@
-#![warn(
-    clippy::disallowed_methods,
-    clippy::indexing_slicing,
-    clippy::todo,
-    clippy::unwrap_used,
-    clippy::panic,
-)]
 #![cfg_attr(not(feature = "std"), no_std)]
 
 /// Edit this file to define custom logic or remove it if it is not needed.
